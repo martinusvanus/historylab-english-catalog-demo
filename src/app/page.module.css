@@ -1,12 +1,17 @@
 .page {
-  background-color: aquamarine;
+  background-color: #fdf2f1;;
+}
+
+.container {
+  padding: 1rem;
 }
 
 .cards {
-  background-color: beige;
+  background-color: #976463;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-  gap: 1rem
+  gap: 1rem;
+  padding: 2rem 1rem;
 }
 
 .card {
@@ -17,4 +22,5 @@
   display: flex;
   justify-content: space-between;
   flex-direction: column;
+  background-color: #fdf2f1;;
 }

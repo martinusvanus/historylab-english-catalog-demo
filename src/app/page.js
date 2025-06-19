@@ -39,46 +39,48 @@ export default function Home() {
 
   return (
     <div className={styles.page}>
-      <h1 style={{marginBottom: '2rem'}}>Catalog demo</h1>
+      <div className={styles.container}>
+        <h1 style={{marginBottom: '2rem'}}>Catalog demo</h1>
 
-      <label htmlFor="sort" style={{ marginRight: '0.5rem' }}>
-        Sort by:
-      </label>
-      <select
-        id="sort"
-        value={sortBy}
-        onChange={(e) => setSortBy(e.target.value)}
-        style={{ marginBottom: '1.5rem', padding: '0.5rem' }}
-      >
-        <option value="name">Name (A–Z)</option>
-        <option value="period-a">Period (ascending)</option>
-        <option value="period-d">Period (descending)</option>
-      </select>
-
-      <div style={{ marginBottom: '2rem' }}>
-        <label>
-          Period range: {minPeriod} – {maxPeriod}
+        <label htmlFor="sort" style={{ marginRight: '0.5rem' }}>
+          Sort by:
         </label>
-        <div style={{ display: 'flex', gap: '1rem', marginTop: '0.5rem' }}>
-          <input
-            type="range"
-            min={realMin}
-            max={realMax}
-            value={minPeriod}
-            onChange={(e) =>
-              setMinPeriod(Math.min(Number(e.target.value), maxPeriod))
-            }
-          />
-          <input
-            type="range"
-            min={realMin}
-            max={realMax}
-            value={maxPeriod}
-            onChange={(e) =>
-              setMaxPeriod(Math.max(Number(e.target.value), minPeriod))
-            }
-          />
-        </div>
+        <select
+          id="sort"
+          value={sortBy}
+          onChange={(e) => setSortBy(e.target.value)}
+          style={{ marginBottom: '1.5rem', padding: '0.5rem' }}
+        >
+          <option value="name">Name (A–Z)</option>
+          <option value="period-a">Period (ascending)</option>
+          <option value="period-d">Period (descending)</option>
+        </select>
+
+        <div style={{ marginBottom: '2rem' }}>
+          <label>
+            Period range: {minPeriod} – {maxPeriod}
+          </label>
+          <div style={{ display: 'flex', gap: '1rem', marginTop: '0.5rem' }}>
+            <input
+              type="range"
+              min={realMin}
+              max={realMax}
+              value={minPeriod}
+              onChange={(e) =>
+                setMinPeriod(Math.min(Number(e.target.value), maxPeriod))
+              }
+            />
+            <input
+              type="range"
+              min={realMin}
+              max={realMax}
+              value={maxPeriod}
+              onChange={(e) =>
+                setMaxPeriod(Math.max(Number(e.target.value), minPeriod))
+              }
+            />
+          </div>
+        </div>        
       </div>
 
       <div className={styles.cards}>
@@ -89,6 +91,6 @@ export default function Home() {
           </div>
         ))}
       </div>
-  </div>
+    </div>
   );
 }
