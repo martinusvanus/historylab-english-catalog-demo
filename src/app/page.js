@@ -1,95 +1,94 @@
+'use client'
+
+import { useState, useEffect } from 'react';
 import Image from "next/image";
 import styles from "./page.module.css";
+import data from './data/data.json';
 
 export default function Home() {
+  const [sortBy, setSortBy] = useState('name');
+  const [minPeriod, setMinPeriod] = useState(0);
+  const [maxPeriod, setMaxPeriod] = useState(10);
+
+  // Get actual min and max period from the data
+  const periods = data.map(item => item.period);
+  const realMin = Math.min(...periods);
+  const realMax = Math.max(...periods);
+
+  // Initialize sliders on mount
+  useEffect(() => {
+    setMinPeriod(realMin);
+    setMaxPeriod(realMax);
+  }, [realMin, realMax]);
+
+  const sortedData = [...data].sort((a, b) => {
+    if (sortBy === 'name') {
+      return a.name.localeCompare(b.name);
+    } if (sortBy === 'period-a') {
+      return a.period - b.period;
+    } else if (sortBy === 'period-d') {
+      return b.period - a.period;
+    }
+    return 0;
+  });
+
+  // Apply filtering by period
+  const filteredData = sortedData.filter(
+    item => item.period >= minPeriod && item.period <= maxPeriod
+  );
+
   return (
     <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>src/app/page.js</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+      <h1 style={{marginBottom: '2rem'}}>Catalog demo</h1>
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
+      <label htmlFor="sort" style={{ marginRight: '0.5rem' }}>
+        Sort by:
+      </label>
+      <select
+        id="sort"
+        value={sortBy}
+        onChange={(e) => setSortBy(e.target.value)}
+        style={{ marginBottom: '1.5rem', padding: '0.5rem' }}
+      >
+        <option value="name">Name (A–Z)</option>
+        <option value="period-a">Period (ascending)</option>
+        <option value="period-d">Period (descending)</option>
+      </select>
+
+      <div style={{ marginBottom: '2rem' }}>
+        <label>
+          Period range: {minPeriod} – {maxPeriod}
+        </label>
+        <div style={{ display: 'flex', gap: '1rem', marginTop: '0.5rem' }}>
+          <input
+            type="range"
+            min={realMin}
+            max={realMax}
+            value={minPeriod}
+            onChange={(e) =>
+              setMinPeriod(Math.min(Number(e.target.value), maxPeriod))
+            }
+          />
+          <input
+            type="range"
+            min={realMin}
+            max={realMax}
+            value={maxPeriod}
+            onChange={(e) =>
+              setMaxPeriod(Math.max(Number(e.target.value), minPeriod))
+            }
+          />
         </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      </div>
+
+      <div className={styles.cards}>
+        {filteredData.map(item => (
+          <div key={item.id} className={styles.card}>
+            <strong>{item.name}</strong>
+            <p>Period: {item.period}</p>
+          </div>
+        ))}
+      </div>
+  </div>
   );
 }
