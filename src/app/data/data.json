@@ -2,51 +2,81 @@
   {
     "id": 1,
     "name": "Co dělají ženy na fotografii?",
-    "period": "1918"
+    "period": "1918",
+    "period-name": "First half of 20th century",
+    "medium": "photograph",
+    "difficulty": "low"
   },
   {
     "id": 2,
     "name": "Proč je Velká Británie zemí čaje?",
-    "period": "1888"
+    "period": "1888",
+    "period-name": "19th century",
+    "medium": "photograph",
+    "difficulty": "high"
   },
   {
     "id": 3,
     "name": "Co přinesla zeď?",
-    "period": "1961"
+    "period": "1961",
+    "period-name": "Cold War",
+    "medium": "photograph",
+    "difficulty": "medium"
   },
   {
     "id": 4,
     "name": "Mnichov 1938: Jaká území byla odtržena?",
-    "period": "1938"
+    "period": "1938",
+    "period-name": "WWII",
+    "medium": "map",
+    "difficulty": "medium"
   },
   {
     "id": 5,
     "name": "Proč nevyhráli válku?",
-    "period": "2007"
+    "period": "2007",
+    "period-name": "WWII",
+    "medium": "text (odborný)",
+    "difficulty": "medium"
   },
   {
     "id": 6,
     "name": "Co umění vypovídá o válce?",
-    "period": "1937"
+    "period": "1937",
+    "period-name": "First half of 20th century",
+    "medium": "art work",
+    "difficulty": "high"
   },
   {
     "id": 7,
     "name": "Proč je v československé škole?",
-    "period": "1953"
+    "period": "1953",
+    "period-name": "Cold War",
+    "medium": "photograph",
+    "difficulty": "low"
   },
   {
     "id": 8,
     "name": "Co se učíme kromě počítání?",
-    "period": "1943"
+    "period": "1943",
+    "period-name": "WWII",
+    "medium": "textbook",
+    "difficulty": "medium"
   },
   {
     "id": 9,
     "name": "Co umožnil fonograf?",
-    "period": "1882"
+    "period": "1882",
+    "period-name": "19th century",
+    "medium": "poster",
+    "difficulty": "low"
   },
   {
     "id": 10,
     "name": "O čem dnes vypovídá příběh Irmy ze Sarajeva?",
-    "period": "1993"
+    "period": "1993",
+    "period-name": "Post-Cold War",
+    "medium": "video",
+    "difficulty": "high"
   }
 ]
