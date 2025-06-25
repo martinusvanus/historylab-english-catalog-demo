@@ -9,12 +9,14 @@ export default function Home() {
   const [sortBy, setSortBy] = useState('name');
   const [minPeriod, setMinPeriod] = useState(0);
   const [maxPeriod, setMaxPeriod] = useState(10);
+  const [selected4CHT, setSelected4CHT] = useState('all');
   const [selectedMedium, setSelectedMedium] = useState('all');
   const [selectedPeriodName, setSelectedPeriodName] = useState('all');
   const [onlyLowDifficulty, setOnlyLowDifficulty] = useState(false);
 
   // Get actual min and max period from the data
   const periods = data.map(item => item.period);
+  const CHTs = Array.from(new Set(data.map(item => item["4cht"])));
   const mediums = Array.from(new Set(data.map(item => item.medium)));
   const periodNames = Array.from(new Set(data.map(item => item["period-name"])));
   const realMin = Math.min(...periods);
@@ -41,7 +43,7 @@ export default function Home() {
   const filteredData = sortedData.filter(item =>
     item.period >= minPeriod &&
     item.period <= maxPeriod &&
-    (selectedMedium === 'all' || item.medium === selectedMedium) && (selectedPeriodName === 'all' || item["period-name"] === selectedPeriodName) && (!onlyLowDifficulty || item.difficulty === 'low')
+    (selected4CHT === 'all' || item["4cht"] === selected4CHT) && (selectedMedium === 'all' || item.medium === selectedMedium) && (selectedPeriodName === 'all' || item["period-name"] === selectedPeriodName) && (!onlyLowDifficulty || item.difficulty === 'low')
   );
 
   return (
@@ -62,6 +64,23 @@ export default function Home() {
           <option value="period-a">Period (ascending)</option>
           <option value="period-d">Period (descending)</option>
         </select>
+
+        <div style={{ marginBottom: '1rem' }}>
+          <label htmlFor="4CHT">Filter by 4CHT: </label>
+          <select
+            id="4CHT"
+            value={selected4CHT}
+            onChange={(e) => setSelected4CHT(e.target.value)}
+            style={{ marginLeft: '0.5rem', padding: '0.5rem' }}
+          >
+            <option value="all">All</option>
+            {CHTs.map((medium) => (
+              <option key={medium} value={medium}>
+                {medium}
+              </option>
+            ))}
+          </select>
+        </div>
 
         <div style={{ marginBottom: '1rem' }}>
           <label htmlFor="medium">Filter by medium: </label>

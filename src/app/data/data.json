@@ -5,7 +5,8 @@
     "period": "1918",
     "period-name": "First half of 20th century",
     "medium": "photograph",
-    "difficulty": "low"
+    "difficulty": "low",
+    "4cht": "continuity and change"
   },
   {
     "id": 2,
@@ -13,7 +14,8 @@
     "period": "1888",
     "period-name": "19th century",
     "medium": "photograph",
-    "difficulty": "high"
+    "difficulty": "high",
+    "4cht": "relationship to the past"
   },
   {
     "id": 3,
@@ -21,7 +23,8 @@
     "period": "1961",
     "period-name": "Cold War",
     "medium": "photograph",
-    "difficulty": "medium"
+    "difficulty": "medium",
+    "4cht": "perspectives"
   },
   {
     "id": 4,
@@ -29,7 +32,8 @@
     "period": "1938",
     "period-name": "WWII",
     "medium": "map",
-    "difficulty": "medium"
+    "difficulty": "medium",
+    "4cht": "cause and consequence"
   },
   {
     "id": 5,
@@ -37,7 +41,8 @@
     "period": "2007",
     "period-name": "WWII",
     "medium": "text (odborný)",
-    "difficulty": "medium"
+    "difficulty": "medium",
+    "4cht": "cause and consequence"
   },
   {
     "id": 6,
@@ -45,7 +50,8 @@
     "period": "1937",
     "period-name": "First half of 20th century",
     "medium": "art work",
-    "difficulty": "high"
+    "difficulty": "high",
+    "4cht": "relationship to the past"
   },
   {
     "id": 7,
@@ -53,7 +59,8 @@
     "period": "1953",
     "period-name": "Cold War",
     "medium": "photograph",
-    "difficulty": "low"
+    "difficulty": "low",
+    "4cht": "perspectives"
   },
   {
     "id": 8,
@@ -61,7 +68,8 @@
     "period": "1943",
     "period-name": "WWII",
     "medium": "textbook",
-    "difficulty": "medium"
+    "difficulty": "medium",
+    "4cht": "cause and consequence"
   },
   {
     "id": 9,
@@ -69,7 +77,8 @@
     "period": "1882",
     "period-name": "19th century",
     "medium": "poster",
-    "difficulty": "low"
+    "difficulty": "low",
+    "4cht": "continuity and change"
   },
   {
     "id": 10,
@@ -77,6 +86,7 @@
     "period": "1993",
     "period-name": "Post-Cold War",
     "medium": "video",
-    "difficulty": "high"
+    "difficulty": "high",
+    "4cht": "relationship to the past"
   }
 ]
