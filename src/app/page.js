@@ -159,6 +159,7 @@ export default function Home() {
             <strong>{item.name}</strong>
             <div>
               <p>Year: {item.period}</p>
+              <p>4CHT: {item["4cht"]}</p>
               <p>Period: {item["period-name"]}</p>
               <p>Main medium: {item.medium}</p>
               <p>Difficulty: {item.difficulty}</p>
