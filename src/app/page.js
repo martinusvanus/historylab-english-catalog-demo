@@ -1,48 +1,39 @@
 'use client'
 
 import { useState, useEffect } from 'react';
+import { Range } from 'react-range';
 import Image from "next/image";
 import styles from "./page.module.css";
 import data from './data/data.json';
 
+const STEP = 1;
+
 export default function Home() {
   const [sortBy, setSortBy] = useState('name');
-  const [minPeriod, setMinPeriod] = useState(0);
-  const [maxPeriod, setMaxPeriod] = useState(10);
   const [selected4CHT, setSelected4CHT] = useState('all');
   const [selectedMedium, setSelectedMedium] = useState('all');
   const [selectedPeriodName, setSelectedPeriodName] = useState('all');
   const [onlyLowDifficulty, setOnlyLowDifficulty] = useState(false);
 
-  // Get actual min and max period from the data
   const periods = data.map(item => item.period);
+  const realMin = Math.min(...periods);
+  const realMax = Math.max(...periods);
+  const [periodRange, setPeriodRange] = useState([realMin, realMax]);
+
   const CHTs = Array.from(new Set(data.map(item => item["4cht"])));
   const mediums = Array.from(new Set(data.map(item => item.medium)));
   const periodNames = Array.from(new Set(data.map(item => item["period-name"])));
-  const realMin = Math.min(...periods);
-  const realMax = Math.max(...periods);
-
-  // Initialize sliders on mount
-  useEffect(() => {
-    setMinPeriod(realMin);
-    setMaxPeriod(realMax);
-  }, [realMin, realMax]);
 
   const sortedData = [...data].sort((a, b) => {
-    if (sortBy === 'name') {
-      return a.name.localeCompare(b.name);
-    } if (sortBy === 'period-a') {
-      return a.period - b.period;
-    } else if (sortBy === 'period-d') {
-      return b.period - a.period;
-    }
+    if (sortBy === 'name') return a.name.localeCompare(b.name);
+    if (sortBy === 'period') return a.period - b.period;
     return 0;
   });
 
   // Filter by period and medium
   const filteredData = sortedData.filter(item =>
-    item.period >= minPeriod &&
-    item.period <= maxPeriod &&
+    item.period >= periodRange[0] &&
+    item.period <= periodRange[1] &&
     (selected4CHT === 'all' || item["4cht"] === selected4CHT) && (selectedMedium === 'all' || item.medium === selectedMedium) && (selectedPeriodName === 'all' || item["period-name"] === selectedPeriodName) && (!onlyLowDifficulty || item.difficulty === 'low')
   );
 
@@ -127,30 +118,55 @@ export default function Home() {
         </div>
 
         <div style={{ marginBottom: '2rem' }}>
-          <label>
-            Period range: {minPeriod} – {maxPeriod}
-          </label>
-          <div style={{ display: 'flex', gap: '1rem', marginTop: '0.5rem' }}>
-            <input
-              type="range"
-              min={realMin}
-              max={realMax}
-              value={minPeriod}
-              onChange={(e) =>
-                setMinPeriod(Math.min(Number(e.target.value), maxPeriod))
-              }
-            />
-            <input
-              type="range"
-              min={realMin}
-              max={realMax}
-              value={maxPeriod}
-              onChange={(e) =>
-                setMaxPeriod(Math.max(Number(e.target.value), minPeriod))
-              }
-            />
-          </div>
-        </div>        
+          <label>Period range: {periodRange[0]} – {periodRange[1]}</label>
+          <Range
+            step={STEP}
+            min={realMin}
+            max={realMax}
+            values={periodRange}
+            onChange={(values) => setPeriodRange(values)}
+            renderTrack={({ props, children }) => {
+              const { key, ...restProps } = props;
+              return (
+                <div
+                  key={key}
+                  {...restProps}
+                  style={{
+                    ...restProps.style,
+                    height: '6px',
+                    background: '#ddd',
+                    margin: '1rem 0',
+                    borderRadius: '4px'
+                  }}
+                >
+                  {children}
+                </div>
+              );
+            }}
+            renderThumb={({ props, index }) => {
+              const { key, ...restProps } = props;
+              return (
+                <div
+                  key={key}
+                  {...restProps}
+                  style={{
+                    ...restProps.style,
+                    height: '25px',
+                    width: '25px',
+                    backgroundColor: '#976463',
+                    borderRadius: '50%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    boxShadow: '0 0 2px black',
+                  }}
+                >
+                  <div style={{ color: 'white', fontSize: '10px' }}>{periodRange[index]}</div>
+                </div>
+              );
+            }}
+          />
+        </div>      
       </div>
 
       <div className={styles.cards}>
